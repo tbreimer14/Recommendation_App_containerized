@@ -230,7 +230,7 @@ with tab1:
             st.rerun()
 
 
-# Tab 2: Genre
+# ================= TAB 2: GENRE =================
 with tab2:
     genres = st.multiselect("Genres", all_genres)
 
@@ -238,20 +238,42 @@ with tab2:
         st.session_state.genre_results = recommend_by_genre(genres)
 
     for m in st.session_state.genre_results:
-        st.write(m["title"])
-        if m["poster"]:
-            st.image(m["poster"], width=100)
 
-
-# Tab 3: Watchlist
-with tab3:
-    st.subheader("Watchlist")
-
-    for m in st.session_state.watchlist:
         col1, col2 = st.columns([1, 4])
 
         with col1:
-            st.image(m["poster"], width=100)
+            st.image(m["poster"], width=120)
+
+            if m["trailer"]:
+                st.markdown(f"[▶ Trailer]({m['trailer']})")
+
+            if st.button("➕ Add", key=f"g_add_{m['movieId']}"):
+                st.session_state.watchlist.append(m)
+
+
+                st.rerun()
+
+
+# ================= TAB 3: WATCHLIST =================
+with tab3:
+    st.subheader("Your Watchlist")
+
+    for m in st.session_state.watchlist:
+
+        col1, col2 = st.columns([1, 4])
+
+        with col1:
+            st.image(m["poster"], width=120)
 
         with col2:
             st.write(m["title"])
+
+            if m.get("trailer"):
+                st.markdown(f"[▶ Trailer]({m['trailer']})")
+
+            if st.button("❌ Remove", key=f"w_del_{m['movieId']}"):
+                st.session_state.watchlist = [
+                    x for x in st.session_state.watchlist
+                    if x["movieId"] != m["movieId"]
+                ]
+                st.rerun()
