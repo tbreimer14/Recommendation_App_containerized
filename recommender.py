@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 from scipy.sparse import csr_matrix
@@ -11,7 +13,7 @@ links = pd.read_csv("ml-latest-small/links.csv")
 
 movie_tmdb_map = dict(zip(links.movieId, links.tmdbId))
 
-TMDB_KEY = "ec7f08ddf34716226bcd56b735d07ca1"  # 👈 FIX THIS
+TMDB_KEY = os.environ.get("TMDB_API_KEY", "")
 
 
 # ---------------- POSTER ----------------

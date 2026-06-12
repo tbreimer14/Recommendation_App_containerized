@@ -1,0 +1,8 @@
+services:
+  watchnext:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      TMDB_API_KEY: ${TMDB_API_KEY:-}
+    restart: unless-stopped
