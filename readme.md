@@ -6,6 +6,23 @@ The system is trained on the MovieLens dataset and converts the user–movie rat
 
 Unlike traditional recommendation systems that require extensive user history, WatchNext generates relevant suggestions from a single input, making it fast, simple, and user-friendly.
 
+## Running with Docker
+
+**1. Build and start**
+```bash
+docker compose up --build
+```
+
+**2. Open the app**
+Visit [http://localhost:8501](http://localhost:8501).
+
+**Other commands**
+```bash
+docker compose down          # stop the container
+docker compose up --build -d # run in the background
+```
+
+# Running Locally
 
 ## To install dependencies please run the following command in the terminal:
 `pip install -r requirements.txt`
